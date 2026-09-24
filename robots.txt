@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://capimmo-tanger.netlify.app/sitemap.xml

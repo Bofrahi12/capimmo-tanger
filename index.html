@@ -1,0 +1,552 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>كاب إيمو طنجة | ابحث وقارن العقارات في المغرب</title>
+  <meta name="description" content="ابحث وقارن العقارات المعروضة للبيع في المغرب: الشقق والستوديوهات حسب المدينة والثمن والمساحة، مع ثمن المتر المربع ورابط المصدر الأصلي لكل إعلان.">
+  <link rel="canonical" href="https://capimmo-tanger.netlify.app/index.html">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ar_MA">
+  <meta property="og:title" content="كاب إيمو طنجة | ابحث وقارن العقارات في المغرب">
+  <meta property="og:description" content="ابحث وقارن العقارات المعروضة للبيع في المغرب حسب المدينة والثمن والمساحة، مع ثمن المتر المربع ورابط المصدر الأصلي لكل إعلان.">
+  <meta property="og:url" content="https://capimmo-tanger.netlify.app/index.html">
+  <meta property="og:image" content="https://capimmo-tanger.netlify.app/assets/og-cover.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="شقة معروضة للبيع في طنجة — كاب إيمو طنجة">
+  <meta name="theme-color" content="#0e7a52">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@600;700;800&family=Noto+Sans+Arabic:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./assets/ai-assistant.css">
+  <script src="./data/listings.js" defer></script>
+  <script src="./app.js" defer></script>
+  <script src="./js/ai-assistant.js" defer></script>
+  <script src="./showcase3d.js" defer></script>
+</head>
+<body>
+<a class="skip-link" href="#properties">تخطَّ إلى العقارات</a>
+
+<header class="site-header">
+  <div class="wrap nav">
+    <a class="brand" href="./index.html">سوق بيع العقار المغربي<small>ابحث، قارن، وتحقق قبل القرار</small></a>
+    <nav class="nav-links" aria-label="التنقل الرئيسي">
+      <a href="./index.html">الرئيسية</a>
+      <a href="#properties">العقارات</a>
+      <a href="#deals">الهمزات</a>
+      <a href="#showcase3d">✨ تجربة 3D</a>
+      <a href="#agency">عقارات الوكالة</a>
+      <a href="#calculator">الحاسبة</a>
+      <a href="#request">اطلب عقاراً</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="theme-toggle" id="themeToggle" type="button" aria-label="تبديل الوضع الداكن">🌙</button>
+      <a class="btn btn-secondary btn-sm" href="tel:0693981822">📞 0693981822</a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+  <!-- البطل -->
+  <section class="wrap hero" aria-labelledby="heroTitle">
+    <div>
+      <p class="eyebrow">منصة مقارنة عقارية مغربية</p>
+      <h1 id="heroTitle">لقى العقار المناسب وقارن قبل ما تقرر</h1>
+      <p class="lead">ابحث عن شقق وستوديوهات للبيع في المغرب، قارن الأثمنة وثمن المتر المربع، وافتح رابط المصدر الأصلي لكل إعلان قبل المعاينة أو أي التزام.</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="#properties">تصفح العقارات</a>
+        <a class="btn btn-accent" href="https://wa.me/212693981822?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A3%D8%A8%D8%AD%D8%AB%20%D8%B9%D9%86%20%D8%B9%D9%82%D8%A7%D8%B1%20%D9%84%D9%84%D8%B4%D8%B1%D8%A7%D8%A1%20%D9%81%D9%8A%20%D8%A7%D9%84%D9%85%D8%BA%D8%B1%D8%A8" target="_blank" rel="noopener">واتساب الوكالة</a>
+        <a class="btn btn-ghost" href="#request">عندك عقار للبيع؟</a>
+      </div>
+      <ul class="hero-points">
+        <li>🔎 بحث حسب المدينة والحي</li>
+        <li>📊 مقارنة الأثمنة</li>
+        <li>📐 ثمن المتر المربع</li>
+        <li>🔗 رابط المصدر الأصلي</li>
+        <li>📞 تواصل مباشر مع الوكالة</li>
+      </ul>
+    </div>
+    <aside class="s3d-stage" id="heroShowcase" aria-label="العقار المميز بتجربة ثلاثية الأبعاد">
+      <div class="s3d-chips" id="heroChips" aria-hidden="true"></div>
+      <div class="s3d-float" id="heroCardWrap"></div>
+      <div class="s3d-agency">
+        <div>
+          <strong>وكالة «كاب إيمو طنجة»</strong>
+          <span>نرافقك في البحث والمعاينة والتفاوض حتى توقيع العقد.</span>
+        </div>
+        <div class="actions">
+          <a class="btn btn-secondary btn-sm" href="tel:0693981822">اتصل: 0693981822</a>
+          <a class="btn btn-secondary btn-sm" href="https://wa.me/212693981822" target="_blank" rel="noopener">واتساب</a>
+        </div>
+      </div>
+    </aside>
+  </section>
+
+  <!-- إحصائيات -->
+  <section class="wrap stats" aria-label="أرقام الموقع">
+    <div class="stat"><strong id="statCount">–</strong><span>عقار في اللائحة</span></div>
+    <div class="stat"><strong id="statCities">–</strong><span>مدينة مغربية</span></div>
+    <div class="stat"><strong id="statDeals">–</strong><span>همزة تحت متوسط المدينة</span></div>
+    <div class="stat"><strong>100%</strong><span>إعلانات برابط المصدر</span></div>
+  </section>
+
+  <!-- العقارات -->
+  <section class="section alt" id="properties" aria-labelledby="propertiesTitle">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <h2 id="propertiesTitle">العقارات المعروضة للبيع</h2>
+          <p>استعمل البحث والفلاتر للوصول بسرعة إلى العقار الأقرب لميزانيتك وحاجتك. المعلومات للمقارنة الأولية فقط — تحقق من رابط المصدر قبل أي التزام.</p>
+        </div>
+        <span id="resultCount" role="status" aria-live="polite"></span>
+      </div>
+
+      <div class="search-panel" role="search" aria-label="البحث في العقارات">
+        <div class="filters">
+          <div class="field">
+            <label for="q">بحث حر</label>
+            <input id="q" type="search" placeholder="مثال: طنجة، أكدال، موقف سيارة" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="fCity">المدينة</label>
+            <select id="fCity"><option value="">كل المدن</option></select>
+          </div>
+          <div class="field">
+            <label for="fHood">الحي</label>
+            <select id="fHood"><option value="">كل الأحياء</option></select>
+          </div>
+          <div class="field">
+            <label for="fType">النوع</label>
+            <select id="fType"><option value="">الكل</option></select>
+          </div>
+          <div class="field">
+            <label for="fMinPrice">أدنى ثمن (درهم)</label>
+            <input id="fMinPrice" type="number" min="0" step="10000" placeholder="مثال: 500000">
+          </div>
+          <div class="field">
+            <label for="fMaxPrice">أقصى ثمن (درهم)</label>
+            <input id="fMaxPrice" type="number" min="0" step="10000" placeholder="مثال: 2000000">
+          </div>
+          <div class="field">
+            <label for="fMinArea">أدنى مساحة (م²)</label>
+            <input id="fMinArea" type="number" min="0" placeholder="مثال: 80">
+          </div>
+          <div class="field">
+            <label for="fMaxArea">أقصى مساحة (م²)</label>
+            <input id="fMaxArea" type="number" min="0" placeholder="مثال: 150">
+          </div>
+          <div class="field">
+            <label for="fRooms">الغرف</label>
+            <select id="fRooms">
+              <option value="">أي عدد</option>
+              <option value="1">غرفة أو أكثر</option>
+              <option value="2">غرفتان أو أكثر</option>
+              <option value="3">3 غرف أو أكثر</option>
+              <option value="4">4 غرف أو أكثر</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="fBaths">الحمامات</label>
+            <select id="fBaths">
+              <option value="">أي عدد</option>
+              <option value="1">حمام أو أكثر</option>
+              <option value="2">حمامان أو أكثر</option>
+              <option value="3">3 أو أكثر</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="fStatus">حالة العرض</label>
+            <select id="fStatus">
+              <option value="">الكل</option>
+              <option value="available">متاح</option>
+              <option value="review">يحتاج مراجعة</option>
+              <option value="unavailable">غير متاح</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="fSort">الترتيب</label>
+            <select id="fSort">
+              <option value="default">الترتيب الافتراضي</option>
+              <option value="price-asc">الأرخص أولاً</option>
+              <option value="price-desc">الأغلى أولاً</option>
+              <option value="area-desc">الأكبر مساحة</option>
+              <option value="ppm-asc">الأفضل في ثمن المتر</option>
+              <option value="newest">الأحدث تحققاً</option>
+            </select>
+          </div>
+        </div>
+        <div class="check-row" style="margin-top:14px" aria-label="خيارات إضافية">
+          <label><input type="checkbox" id="fFurnished"> مفروش</label>
+          <label><input type="checkbox" id="fParking"> موقف سيارة</label>
+          <label><input type="checkbox" id="fElevator"> مصعد</label>
+          <label><input type="checkbox" id="fDeals"> الهمزات فقط (تحت متوسط المدينة)</label>
+          <label><input type="checkbox" id="fFavs"> مفضلتي فقط</label>
+        </div>
+        <div class="filter-actions">
+          <span>💡 «همزة» تعني أن ثمن المتر المربع أقل من متوسط المدينة المرجعي — وليست تخفيضاً من البائع.</span>
+          <button id="clearFilters" class="text-button" type="button">مسح جميع الفلاتر</button>
+        </div>
+      </div>
+
+      <div id="listingGrid" class="listing-grid" aria-live="off"></div>
+      <div id="emptyState" class="empty" role="status">
+        <p><strong>لم نجد عروضاً مطابقة.</strong></p>
+        <p>جرب توسيع الميزانية أو المساحة، أو امسح بعض الفلاتر.</p>
+        <button class="btn btn-secondary btn-sm" type="button" id="emptyClear">مسح جميع الفلاتر</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- الهمزات -->
+  <section class="section" id="deals" aria-labelledby="dealsTitle">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <h2 id="dealsTitle">🔥 الهمزات</h2>
+          <p>عقارات ثمن المتر المربع فيها أقل من متوسط مدينتها المرجعي. النسبة محسوبة حسابياً من بيانات الموقع — وليست تخفيضاً معلناً من البائع.</p>
+        </div>
+      </div>
+      <div id="dealsGrid" class="listing-grid"></div>
+      <p class="note">المتوسطات المستعملة مرجعية داخلية للمقارنة (آخر تحديث 2026-09-21) وليست إحصاءات رسمية. تحقق دائماً من رابط المصدر الأصلي قبل أي التزام.</p>
+    </div>
+  </section>
+
+  <!-- الهمزات بتجربة ثلاثية الأبعاد -->
+  <section class="section alt" id="showcase3d" aria-labelledby="s3dTitle">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <h2 id="s3dTitle">✨ الهمزات بتجربة ثلاثية الأبعاد</h2>
+          <p>حرّك المؤشر — أو إصبعك على الهاتف — فوق البطاقات لتدور معك. أفضل الهمزات حالياً بأسعارها الحقيقية وروابط مصادرها.</p>
+        </div>
+      </div>
+      <div class="s3d-grid" id="s3dGrid"></div>
+    </div>
+  </section>
+
+  <!-- عقارات الوكالة -->
+  <section class="section alt" id="agency" aria-labelledby="agencyTitle">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <h2 id="agencyTitle">🏠 عقارات الوكالة مباشرة</h2>
+          <p>عقارات تعرضها وكالة «كاب إيمو طنجة» مباشرة — للاستفسار أو المعاينة اتصل على <a href="tel:0693981822">0693981822</a>.</p>
+        </div>
+      </div>
+      <div id="agencyGrid" class="listing-grid"></div>
+    </div>
+  </section>
+
+  <!-- مؤشرات السوق -->
+  <section class="section" id="market" aria-labelledby="marketTitle">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <h2 id="marketTitle">📊 مؤشرات ثمن المتر المربع</h2>
+          <p>متوسطات مرجعية داخلية للمقارنة — آخر تحديث 2026-09-21، وليست إحصاءات رسمية.</p>
+        </div>
+      </div>
+      <div id="medianGrid" class="median-grid"></div>
+    </div>
+  </section>
+
+  <!-- الحاسبة -->
+  <section class="section alt" id="calculator" aria-labelledby="calcTitle">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <h2 id="calcTitle">🧮 حاسبة القرض السكني</h2>
+          <p>تقدير أولي للقسط الشهري. لا يشمل التأمين ورسوم الملف ومصاريف الموثق — استشر بنكك للأرقام النهائية.</p>
+        </div>
+      </div>
+      <div class="tool-grid">
+        <form id="mortgageForm" class="tool" novalidate aria-label="حاسبة القرض السكني">
+          <div class="calculator-fields">
+            <div class="field">
+              <label for="homePrice">ثمن العقار (درهم)</label>
+              <input id="homePrice" type="number" min="1" step="1000" value="1200000" required>
+            </div>
+            <div class="field">
+              <label for="downPayment">التسبيق (درهم)</label>
+              <input id="downPayment" type="number" min="0" step="1000" value="240000" required>
+            </div>
+            <div class="field">
+              <label for="years">المدة: <span id="yearsLabel">20 سنة</span></label>
+              <input id="years" type="range" min="5" max="30" step="1" value="20" aria-describedby="yearsLabel">
+            </div>
+            <div class="field">
+              <label for="rate">نسبة الفائدة: <span id="rateLabel">4.50%</span></label>
+              <input id="rate" type="range" min="2" max="8" step="0.05" value="4.5" aria-describedby="rateLabel">
+            </div>
+          </div>
+          <p class="form-error" id="calcError" role="alert"></p>
+        </form>
+        <aside class="tool result" aria-live="polite" aria-label="نتيجة الحاسبة">
+          <span>القسط الشهري التقديري</span>
+          <strong id="monthlyPayment">–</strong>
+          <div class="meta">مبلغ القرض: <b id="loanAmount">–</b></div>
+          <div class="meta">مجموع الفوائد: <b id="interestTotal">–</b></div>
+          <div class="meta">نسبة التمويل: <b id="loanRatio">–</b></div>
+          <div class="meta">تكاليف تقديرية (ملف + تأمين + موثق): <b id="extraCosts">–</b></div>
+        </aside>
+      </div>
+      <p class="note">⚠️ حساب تقريبي لأغراض المقارنة فقط، وليس عرضاً بنكياً. الأقساط الفعلية تعتمد على شروط البنك والتأمين.</p>
+    </div>
+  </section>
+
+  <!-- طلب عقار -->
+  <section class="section" id="request" aria-labelledby="requestTitle">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <h2 id="requestTitle">📩 أرسل طلبك العقاري</h2>
+          <p>عمّر الاستمارة وسنجهز لك رسالة واتساب منظمة للوكالة. <strong>لن يتم إرسال أي شيء تلقائياً</strong> — أنت من يضغط زر الإرسال في واتساب.</p>
+        </div>
+      </div>
+      <form id="requestForm" class="tool" novalidate aria-label="نموذج طلب عقار">
+        <div class="calculator-fields">
+          <div class="field">
+            <label for="rName">الاسم الكامل *</label>
+            <input id="rName" name="name" required autocomplete="name" placeholder="مثال: يوسف العلوي">
+          </div>
+          <div class="field">
+            <label for="rPhone">رقم الهاتف *</label>
+            <input id="rPhone" name="phone" type="tel" required autocomplete="tel" placeholder="مثال: 0612345678" dir="ltr" style="text-align:right">
+            <span class="hint">رقم مغربي يبدأ بـ 06 أو 07</span>
+          </div>
+          <div class="field">
+            <label for="rCity">المدينة المطلوبة *</label>
+            <input id="rCity" name="city" required placeholder="مثال: طنجة">
+          </div>
+          <div class="field">
+            <label for="rHoods">الأحياء المفضلة</label>
+            <input id="rHoods" name="hoods" placeholder="مثال: ملابطا، وسط المدينة">
+          </div>
+          <div class="field">
+            <label for="rBudget">الميزانية (درهم) *</label>
+            <input id="rBudget" name="budget" type="number" min="1" required placeholder="مثال: 1500000">
+          </div>
+          <div class="field">
+            <label for="rRooms">عدد الغرف المطلوب</label>
+            <select id="rRooms" name="rooms">
+              <option value="">غير محدد</option>
+              <option value="1">1+</option>
+              <option value="2">2+</option>
+              <option value="3">3+</option>
+              <option value="4">4+</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="rType">نوع العقار</label>
+            <select id="rType" name="type">
+              <option value="">غير محدد</option>
+              <option value="شقة">شقة</option>
+              <option value="ستوديو">ستوديو</option>
+              <option value="فيلا">فيلا</option>
+              <option value="أرض">أرض</option>
+              <option value="مكتب">مكتب / محل</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="rDeal">نوع العملية</label>
+            <select id="rDeal" name="deal">
+              <option value="شراء">شراء</option>
+              <option value="كراء">كراء</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="rTime">أفضل وقت للتواصل</label>
+            <select id="rTime" name="time">
+              <option value="">غير محدد</option>
+              <option value="صباحاً">صباحاً</option>
+              <option value="بعد الزوال">بعد الزوال</option>
+              <option value="مساءً">مساءً</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="rNotes">ملاحظات إضافية</label>
+            <textarea id="rNotes" name="notes" rows="2" placeholder="أي تفاصيل أخرى تهمك"></textarea>
+          </div>
+        </div>
+        <div class="check-row" style="margin-top:14px">
+          <label><input type="checkbox" id="rConsent" required> أوافق على استعمال بياناتي للتواصل معي بخصوص طلبي العقاري *</label>
+        </div>
+        <p class="form-error" id="reqError" role="alert"></p>
+        <div class="actions" style="margin-top:14px">
+          <button class="btn btn-primary" type="submit">تجهيز رسالة واتساب</button>
+        </div>
+      </form>
+    </div>
+  </section>
+
+  <!-- نصائح -->
+  <section class="section alt" id="guide" aria-labelledby="guideTitle">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <h2 id="guideTitle">✅ قبل ما تشري</h2>
+          <p>خطوات أساسية تساعدك على قرار أكثر أماناً.</p>
+        </div>
+      </div>
+      <div class="checklist">
+        <article class="check"><h3>حدد ميزانيتك</h3><p>خلِّ هامشاً للمصاريف الإضافية: رسوم الموثق، التسجيل، الإصلاح، والتأمين.</p></article>
+        <article class="check"><h3>تحقق من الملكية</h3><p>اطلب الوثائق (رسم الملكية) واستشر موثقاً قبل دفع أي مبلغ مهم.</p></article>
+        <article class="check"><h3>عاين العقار بنفسك</h3><p>افحص البناية والتجهيزات والجيران، وقارن بعروض قريبة في نفس الحي.</p></article>
+        <article class="check"><h3>وثّق الاتفاق كتابة</h3><p>اجعل شروط الحجز والوعد بالبيع مكتوبة وواضحة وموقعة من الطرفين.</p></article>
+      </div>
+      <p class="note">ℹ️ هذا الموقع أداة مقارنة أولية وليس بديلاً عن الموثق أو الفحص القانوني للعقار.</p>
+    </div>
+  </section>
+
+  <!-- مفضلتي -->
+  <section class="section" id="favorites" aria-labelledby="favTitle">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <h2 id="favTitle">❤️ مفضلتي</h2>
+          <p>العقارات التي حفظتها — تُحفظ في متصفحك فقط ولا تُرسل لأي جهة.</p>
+        </div>
+        <button class="text-button" type="button" id="clearFavs">مسح المفضلة</button>
+      </div>
+      <div id="favGrid" class="listing-grid"></div>
+      <div id="favEmpty" class="empty">
+        <p>لم تحفظ أي عقار بعد. اضغط على زر <strong>🤍 مفضلة</strong> في أي بطاقة لحفظها هنا.</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- شريط المقارنة -->
+<div class="compare-bar" id="compareBar" role="region" aria-label="شريط المقارنة">
+  <span id="compareCount">تم اختيار 0 من 3</span>
+  <button class="btn btn-accent btn-sm" type="button" id="openCompare">قارن الآن</button>
+  <button class="text-button" type="button" id="clearCompare" style="color:#fff">مسح</button>
+</div>
+
+<!-- نافذة المقارنة -->
+<div class="modal" id="compareModal" role="dialog" aria-modal="true" aria-labelledby="compareTitle">
+  <div class="modal-box">
+    <button class="modal-close" type="button" data-close aria-label="إغلاق">×</button>
+    <h2 id="compareTitle">مقارنة العقارات</h2>
+    <div id="compareContent" style="overflow-x:auto"></div>
+  </div>
+</div>
+
+  <section class="section" id="faq" aria-labelledby="faqTitle">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <h2 id="faqTitle">❓ الأسئلة الشائعة</h2>
+          <p>أجوبة عن أكثر ما يسأل عنه زوارنا — عن الوكالة، عرض العقارات، والشراء بأمان.</p>
+        </div>
+      </div>
+      <div class="faq-list">
+        <details class="faq-item">
+          <summary>كيفاش نعرض الشقة ديالي عندكم؟</summary>
+          <p>أي واحد يقدر يعرض العقار ديالو عندنا. صيفط لنا عبر واتساب على <a href="https://wa.me/212693981822" target="_blank" rel="noopener">0693981822</a>: صور العقار، المساحة، الحي، والثمن المطلوب — ونتكلفو بالباقي.</p>
+        </details>
+        <details class="faq-item">
+          <summary>منين كتجيبو العقارات المعروضة في الموقع؟</summary>
+          <p>كنجمعو الإعلانات من مواقع الإعلانات المبوبة بحال أفيتو، بالإضافة للعقارات اللي كيعرضوها أصحابها عندنا مباشرة في الوكالة. كل إعلان كيبين المصدر ديالو ودرجة التحقق.</p>
+        </details>
+        <details class="faq-item">
+          <summary>كيف أتحقق من ملكية عقار قبل الشراء؟</summary>
+          <p>اطلب من البائع نسخة من رسم الملكية (التيتر)، وتأكد من مطابقته للعقار لدى المحافظة العقارية ومن خلوه من الرهون. نوصي دائمًا بإتمام البيع عبر موثق.</p>
+        </details>
+        <details class="faq-item">
+          <summary>هل الأثمنة المعروضة نهائية؟</summary>
+          <p>الأثمنة المعروضة هي أثمنة الطلب المعلنة في المصدر وقد تكون قابلة للتفاوض مع البائع. ملاحظة: عبارة «أقل بـX% من متوسط المدينة» نسبة محسوبة حسابيًا مقابل متوسط المدينة المرجعي، وليست تخفيضًا معلنًا من البائع.</p>
+        </details>
+        <details class="faq-item">
+          <summary>كيف أطلب معاينة عقار؟</summary>
+          <p>من صفحة العقار اضغط «طلب معاينة عبر واتساب» — تُفتح لك رسالة جاهزة، ولن يُرسل أي شيء دون ضغطك على زر الإرسال.</p>
+        </details>
+        <details class="faq-item">
+          <summary>واش العقارات المعروضة تم التحقق منها؟</summary>
+          <p>كل إعلان يحمل شارة توضح مستوى التحقق: «تم التحقق من الرابط» يعني أننا فتحنا الإعلان الأصلي وتأكدنا أنه ما زال منشورًا. لكن المعلومات قد تتغير — تحقق من المصدر الأصلي قبل أي التزام.</p>
+        </details>
+      </div>
+      <p class="note">ℹ️ هذا الموقع أداة مقارنة أولية وليس بديلاً عن الموثق أو الفحص القانوني للعقار.</p>
+    </div>
+  </section>
+
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <h3>سوق بيع العقار المغربي</h3>
+        <p style="color:var(--muted);font-size:.9rem">منصة مغربية لمقارنة العقارات المعروضة للبيع. المعلومات للمقارنة الأولية فقط — تحقق من المصدر الأصلي قبل أي التزام.</p>
+      </div>
+      <nav aria-label="روابط المدن">
+        <h3>ابحث حسب المدينة</h3>
+        <ul id="cityLinks"></ul>
+      </nav>
+      <nav aria-label="روابط الموقع">
+        <h3>روابط</h3>
+        <ul>
+          <li><a href="#properties">العقارات</a></li>
+          <li><a href="#deals">الهمزات</a></li>
+          <li><a href="#calculator">حاسبة القرض</a></li>
+          <li><a href="./privacy.html">سياسة الخصوصية</a></li>
+          <li><a href="./terms.html">شروط الاستخدام</a></li>
+        </ul>
+      </nav>
+      <div>
+        <h3>تواصل مع الوكالة</h3>
+        <ul>
+          <li><a href="tel:0693981822">📞 0693981822</a></li>
+          <li><a href="https://wa.me/212693981822" target="_blank" rel="noopener">💬 واتساب</a></li>
+          <li style="color:var(--muted);font-size:.9rem">وكالة «كاب إيمو طنجة»</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© <span id="year"></span> سوق بيع العقار المغربي — جميع الحقوق محفوظة.</span>
+      <span>آخر تحديث للبيانات: <span id="dataUpdated"></span></span>
+    </div>
+  </div>
+</footer>
+
+<a class="floating-call" href="tel:0693981822" aria-label="الاتصال بالوكالة">📞 0693981822</a>
+<div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "سوق بيع العقار المغربي",
+  "url": "https://capimmo-tanger.netlify.app/",
+  "inLanguage": "ar",
+  "description": "منصة مغربية للبحث ومقارنة العقارات المعروضة للبيع."
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "RealEstateAgent",
+  "name": "Cap Immo Tanger",
+  "alternateName": "كاب إيمو طنجة",
+  "url": "https://capimmo-tanger.netlify.app/",
+  "telephone": "+212693981822",
+  "areaServed": { "@type": "City", "name": "Tangier" },
+  "address": { "@type": "PostalAddress", "addressLocality": "Tangier", "addressCountry": "MA" },
+  "description": "وكالة عقارية في طنجة: بيع العقارات، عرض عقارك للبيع، ومعاينات عبر واتساب."
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "كيفاش نعرض الشقة ديالي عندكم؟", "acceptedAnswer": { "@type": "Answer", "text": "أي واحد يقدر يعرض العقار ديالو عندنا. صيفط لنا عبر واتساب على 0693981822: صور العقار، المساحة، الحي، والثمن المطلوب." } },
+    { "@type": "Question", "name": "منين كتجيبو العقارات المعروضة في الموقع؟", "acceptedAnswer": { "@type": "Answer", "text": "كنجمعو الإعلانات من مواقع الإعلانات المبوبة بحال أفيتو، بالإضافة للعقارات اللي كيعرضوها أصحابها عندنا مباشرة في الوكالة." } },
+    { "@type": "Question", "name": "كيف أتحقق من ملكية عقار قبل الشراء؟", "acceptedAnswer": { "@type": "Answer", "text": "اطلب من البائع نسخة من رسم الملكية (التيتر)، وتأكد من مطابقته للعقار لدى المحافظة العقارية ومن خلوه من الرهون. نوصي بإتمام البيع عبر موثق." } },
+    { "@type": "Question", "name": "هل الأثمنة المعروضة نهائية؟", "acceptedAnswer": { "@type": "Answer", "text": "الأثمنة المعروضة هي أثمنة الطلب المعلنة في المصدر وقد تكون قابلة للتفاوض مع البائع." } },
+    { "@type": "Question", "name": "كيف أطلب معاينة عقار؟", "acceptedAnswer": { "@type": "Answer", "text": "من صفحة العقار اضغط «طلب معاينة عبر واتساب» — تُفتح لك رسالة جاهزة، ولن يُرسل أي شيء دون ضغطك على زر الإرسال." } }
+  ]
+}
+</script>
+</body>
+</html>

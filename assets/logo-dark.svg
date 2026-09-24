@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 660 200" role="img" aria-label="Cap Immo Tanger">
+  <!-- Badge -->
+  <rect x="10" y="10" width="180" height="180" rx="48" fill="#0a5a3d"/>
+  <rect x="25" y="25" width="150" height="150" rx="37" fill="none" stroke="#c9a227" stroke-width="5"/>
+  <!-- Roof -->
+  <path d="M58 108 L100 66 L142 108" fill="none" stroke="#ffffff" stroke-width="20" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- House body with arched door -->
+  <path fill="#ffffff" fill-rule="evenodd" d="M78 114 h44 v52 h-44 z M93 166 v-22 a7 7 0 0 1 14 0 v22 z"/>
+  <!-- Wordmark -->
+  <text x="220" y="100" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="62" font-weight="800" letter-spacing="1" fill="#ffffff">CAP IMMO</text>
+  <text x="222" y="144" font-family="DejaVu Sans, Arial, Helvetica, sans-serif" font-size="30" font-weight="600" letter-spacing="12" fill="#e8c94a">TANGER</text>
+</svg>
