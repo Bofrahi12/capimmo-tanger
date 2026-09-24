@@ -306,7 +306,8 @@
             if (!r.ok) throw new Error("http-" + r.status);
             return r.json();
           }).then(function (data) {
-            var flt = validateFilters(data);
+            // الـbackend يرجع {ok, provider, filters} — نقبل الشكلين معاً
+            var flt = validateFilters((data && data.filters) || data);
             if (!flt) throw new Error("invalid-json");
             resolve(flt);
           }).catch(reject);
@@ -320,7 +321,7 @@
     if (!d || typeof d !== "object") return null;
     var out = { intent: "search", language: "unknown", features: [], clarifications: [], assumptions: [] };
     var str = function (v) { return typeof v === "string" ? v.slice(0, 120) : null; };
-    var num = function (v) { v = Number(v); return isFinite(v) && v >= 0 ? v : null; };
+    var num = function (v) { if (v == null || v === "") return null; v = Number(v); return isFinite(v) && v >= 0 ? v : null; };
     out.intent = ["search", "compare", "mortgage", "lead", "faq", "greeting"].indexOf(d.intent) !== -1 ? d.intent : "search";
     var city = str(d.city);
     if (city && CITY_MAP.some(function (c) { return c.ar === city; })) out.city = city;
@@ -969,7 +970,10 @@
       dealPct: dealPct,
       annuityMonthly: annuityMonthly,
       maxLoanFromMonthly: maxLoanFromMonthly,
-      parseMortgageQuery: parseMortgageQuery
+      parseMortgageQuery: parseMortgageQuery,
+      // مسار المزوّد المفعّل (http/local) — لاختبار الربط مع الـbackend
+      providerParse: function (t) { return (AIProviders[AI_CONFIG.provider] || AIProviders.local).parse(t); },
+      providerName: function () { return (AIProviders[AI_CONFIG.provider] || AIProviders.local).name; }
     };
   }
 
