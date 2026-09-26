@@ -439,3 +439,11 @@ input[type="range"] { width: 100%; accent-color: var(--green); }
 .similar-card .similar-title { font-weight: 700; font-size: .92rem; margin: 0 0 4px; }
 .similar-card .similar-price { color: var(--accent, #0e7a52); font-weight: 800; }
 .similar-card:hover { border-color: var(--accent, #0e7a52); }
+
+/* بانر الجالية: الشراء الآمن */
+.diaspora-banner{background:linear-gradient(120deg,#0b3d2e,#14532d 60%,#166534);color:#fff;padding:2.4rem 0}
+.diaspora-inner{display:flex;align-items:center;justify-content:space-between;gap:1.5rem;flex-wrap:wrap}
+.diaspora-banner .eyebrow{color:#fbbf24;margin:0 0 .4rem}
+.diaspora-banner h2{margin:0 0 .4rem;font-size:1.55rem;line-height:1.4}
+.diaspora-banner p{margin:0;opacity:.92}
+@media(max-width:700px){.diaspora-inner{flex-direction:column;align-items:flex-start}.diaspora-banner h2{font-size:1.3rem}}
