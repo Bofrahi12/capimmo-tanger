@@ -291,26 +291,38 @@
       name: "http",
       parse: function (text) {
         // يُفعَّل فقط عند وجود backend — يتطلب AI_CONFIG.endpoint
+        // ملاحظة: خدمة Render المجانية (free tier) تنام بعد الخمول، وأول طلب
+        // كيفيّقها (cold start ‏~30-60 ثانية). عند الفشل نعاود المحاولة مرة
+        // وحدة — المحاولة الأولى هي اللي كتفيّق الخدمة.
         return new Promise(function (resolve, reject) {
           if (!AI_CONFIG.endpoint) return reject(new Error("no-endpoint"));
-          var ctrl = null;
-          try { ctrl = new AbortController(); } catch (e) {}
-          var timer = setTimeout(function () { try { ctrl && ctrl.abort(); } catch (e) {} }, AI_CONFIG.timeoutMs);
-          fetch(AI_CONFIG.endpoint, {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ text: text }),
-            signal: ctrl ? ctrl.signal : undefined
-          }).then(function (r) {
-            clearTimeout(timer);
-            if (!r.ok) throw new Error("http-" + r.status);
-            return r.json();
-          }).then(function (data) {
-            // الـbackend يرجع {ok, provider, filters} — نقبل الشكلين معاً
-            var flt = validateFilters((data && data.filters) || data);
-            if (!flt) throw new Error("invalid-json");
-            resolve(flt);
-          }).catch(reject);
+          var attempts = 0;
+          function tryOnce() {
+            attempts++;
+            var ctrl = null;
+            try { ctrl = new AbortController(); } catch (e) {}
+            var timer = setTimeout(function () { try { ctrl && ctrl.abort(); } catch (e) {} }, AI_CONFIG.timeoutMs);
+            fetch(AI_CONFIG.endpoint, {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ text: text }),
+              signal: ctrl ? ctrl.signal : undefined
+            }).then(function (r) {
+              clearTimeout(timer);
+              if (!r.ok) throw new Error("http-" + r.status);
+              return r.json();
+            }).then(function (data) {
+              // الـbackend يرجع {ok, provider, filters} — نقبل الشكلين معاً
+              var flt = validateFilters((data && data.filters) || data);
+              if (!flt) throw new Error("invalid-json");
+              resolve(flt);
+            }).catch(function (err) {
+              clearTimeout(timer);
+              if (attempts < 2) setTimeout(tryOnce, 2500);
+              else reject(err);
+            });
+          }
+          tryOnce();
         });
       }
     }

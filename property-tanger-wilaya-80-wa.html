@@ -16,6 +16,14 @@
   <meta property="og:image:alt" content="شقة 80 م² + تراس — أمام الولاية، طنجة">
   <meta property="og:url" content="https://bofrahi12.github.io/capimmo-tanger/property-tanger-wilaya-80-wa.html">
   <meta name="theme-color" content="#0e7a52">
+  <!-- تحليلات الموقع: الصق معرّف القياس GA4 الخاص بك مكان G-XXXXXXXXXX -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@600;700;800&family=Noto+Sans+Arabic:wght@400;500;700;800&display=swap" rel="stylesheet">
@@ -24,7 +32,8 @@
   <script src="./data/listings.js" defer></script>
   <script src="./listing.js" defer></script>
   <!-- ربط الـbackend: عند توفر رابط الـAPI ضع provider:"http" و endpoint:"https://…/api/ai/parse" -->
-  <script>window.SOUQ_AI_CONFIG = { provider: "http", endpoint: "https://capimmo-api.onrender.com/api/ai/parse" };</script>
+  <!-- timeoutMs مرتفع لأن خدمة Render المجانية تنام بعد الخمول وأول طلب يفيّقها (cold start) -->
+  <script>window.SOUQ_AI_CONFIG = { provider: "http", endpoint: "https://capimmo-api.onrender.com/api/ai/parse", timeoutMs: 25000 };</script>
   <script src="./js/ai-assistant.js" defer></script>
 </head>
 <body data-listing-id="tanger-wilaya-80-wa">
@@ -32,8 +41,9 @@
 
 <header class="site-header">
   <div class="wrap nav">
-    <a class="brand" href="./index.html">سوق بيع العقار المغربي<small>ابحث، قارن، وتحقق قبل القرار</small></a>
-    <nav class="nav-links" aria-label="التنقل الرئيسي">
+    <a class="brand" href="./index.html">كاب إيمو طنجة<small>سوق بيع العقار المغربي</small></a>
+    <button class="nav-toggle" id="navToggle" type="button" aria-label="فتح قائمة التنقل" aria-expanded="false" aria-controls="mainNav">☰</button>
+    <nav class="nav-links" id="mainNav" aria-label="التنقل الرئيسي">
       <a href="./index.html">الرئيسية</a>
       <a href="./index.html#properties">العقارات</a>
       <a href="./index.html#deals">الهمزات</a>
@@ -60,13 +70,18 @@
   <div class="wrap">
     <div class="footer-grid">
       <div>
-        <h3>سوق بيع العقار المغربي</h3>
+        <h3>كاب إيمو طنجة</h3>
         <p style="color:var(--muted);font-size:.9rem">المعلومات للمقارنة الأولية فقط — تحقق من المصدر الأصلي قبل أي التزام.</p>
       </div>
       <nav aria-label="روابط الموقع">
         <h3>روابط</h3>
         <ul>
           <li><a href="./index.html">الرئيسية</a></li>
+          <li><a href="./index.html#properties">العقارات</a></li>
+          <li><a href="./index.html#deals">الهمزات 🔥</a></li>
+          <li><a href="./index.html#calculator">حاسبة القرض</a></li>
+          <li><a href="./blog/">المدونة</a></li>
+          <li><a href="./about.html">من نحن</a></li>
           <li><a href="./privacy.html">سياسة الخصوصية</a></li>
           <li><a href="./terms.html">شروط الاستخدام</a></li>
         </ul>
@@ -76,6 +91,7 @@
         <ul>
           <li><a href="tel:0693981822">📞 0693981822</a></li>
           <li><a href="https://wa.me/212693981822" target="_blank" rel="noopener">💬 واتساب</a></li>
+          <li><a href="https://www.instagram.com/cap_immo12/" target="_blank" rel="noopener">📸 إنستغرام: @cap_immo12</a></li>
         </ul>
       </div>
     </div>

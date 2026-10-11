@@ -192,6 +192,33 @@ a { color: var(--green); }
 .badge.verify { background: #1d6fb8; }
 .badge.unavailable { background: #8a8a8a; }
 .badge.review { background: #a06a00; }
+.badge.ai-photos { background: #7b5cd6; }
+.ai-notice { background: #f3efff; border: 1px solid #c9bdf0; border-radius: 10px; padding: .7rem 1rem; font-size: .92rem; color: #4a3d8f; margin-top: .8rem; }
+
+/* ---------- فلاتر قابلة للطي + رقائق الفلاتر النشطة ---------- */
+.filters-toggle { display: inline-flex; align-items: center; gap: 8px; background: var(--green-soft); border: 1px solid var(--line); color: var(--green-dark); font-weight: 800; font-family: var(--font-head); font-size: 1rem; border-radius: 12px; padding: 10px 18px; cursor: pointer; margin-bottom: 14px; }
+.filters-toggle .chev { transition: transform .25s; display: inline-block; }
+.filters-toggle[aria-expanded="false"] .chev { transform: rotate(-90deg); }
+.filters.collapsed { display: none; }
+.active-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
+.active-chips:empty { display: none; }
+.chip { display: inline-flex; align-items: center; gap: 6px; background: var(--green); color: #fff; border-radius: 999px; padding: 5px 8px 5px 12px; font-size: .82rem; font-weight: 700; }
+.chip button { background: rgba(255,255,255,.25); border: 0; color: #fff; border-radius: 50%; width: 20px; height: 20px; line-height: 1; cursor: pointer; font-size: .8rem; }
+
+/* ---------- لايت بوكس المعرض ---------- */
+.lightbox { position: fixed; inset: 0; z-index: 200; background: rgba(5,12,9,.94); display: none; align-items: center; justify-content: center; }
+.lightbox.open { display: flex; }
+.lightbox img { max-width: 94vw; max-height: 88vh; object-fit: contain; border-radius: 12px; }
+.lb-btn { position: absolute; background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.25); color: #fff; border-radius: 50%; width: 48px; height: 48px; font-size: 1.4rem; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+.lb-close { top: 16px; inset-inline-end: 16px; }
+.lb-prev { inset-inline-start: 12px; top: 50%; transform: translateY(-50%); }
+.lb-next { inset-inline-end: 12px; top: 50%; transform: translateY(-50%); }
+.lb-count { position: absolute; bottom: 18px; color: #fff; background: rgba(0,0,0,.5); padding: 4px 14px; border-radius: 999px; font-size: .85rem; }
+.gallery-main img { cursor: zoom-in; }
+
+/* ---------- هيكل الإحصائيات أثناء التحميل ---------- */
+.stat strong.skel { display: inline-block; min-width: 3ch; color: transparent; background: linear-gradient(90deg, var(--line) 25%, var(--green-soft) 50%, var(--line) 75%); background-size: 200% 100%; border-radius: 6px; animation: skel 1.2s infinite; user-select: none; }
+@keyframes skel { to { background-position: -200% 0; } }
 .card-body { padding: 16px 18px 18px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
 .card-title { font-size: 1.02rem; font-weight: 800; margin: 0; }
 .card-title a { color: var(--text); text-decoration: none; }
@@ -329,12 +356,22 @@ input[type="range"] { width: 100%; accent-color: var(--green); }
 .prose ul { padding-inline-start: 20px; }
 
 /* ---------- متجاوب ---------- */
+.nav-toggle { display: none; background: var(--green-soft); border: 1px solid var(--line); border-radius: 10px; font-size: 1.3rem; line-height: 1; padding: 8px 12px; cursor: pointer; color: var(--green-dark); }
 @media (max-width: 900px) {
   .hero { grid-template-columns: 1fr; padding-block: 30px 20px; }
   .detail-layout { grid-template-columns: 1fr; }
   .tool-grid { grid-template-columns: 1fr; }
   .stats { grid-template-columns: repeat(2, 1fr); }
-  .nav-links { order: 3; width: 100%; }
+  /* هامبرغر بدل روابط ملتفة */
+  .nav-toggle { display: inline-block; }
+  .nav-links { display: none; order: 3; width: 100%; flex-direction: column; background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 8px; margin-top: 8px; }
+  .nav-links.open { display: flex; }
+  .nav-links a { padding: 12px 14px; }
+  /* بطل مدمج على الهاتف: نخفي النقاط وبطاقة 3D ونبقي زراً واحداً */
+  .hero-points, .s3d-stage { display: none; }
+  .hero .actions .btn:not(.btn-primary) { display: none; }
+  .hero { padding-block: 22px 14px; }
+  .hero h1 { font-size: 1.5rem; }
 }
 @media (max-width: 560px) {
   .calculator-fields { grid-template-columns: 1fr; }
@@ -345,26 +382,27 @@ input[type="range"] { width: 100%; accent-color: var(--green); }
 
 /* ============================================================
    العرض ثلاثي الأبعاد (3D Showcase) — hero + خانة الهمزات
+   هوية خضراء مغربية موحدة (ذهبي خفيف كلمسة ثانوية)
    ============================================================ */
 .s3d-stage { position: relative; perspective: 1300px; }
 .s3d-float { animation: s3d-float 6.5s ease-in-out infinite; }
 @keyframes s3d-float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
 
 .s3d-card {
-  display: block; text-decoration: none; color: #f6efdd;
-  background: linear-gradient(165deg, #241a09 0%, #141007 55%, #0b0904 100%);
-  border: 1px solid rgba(201,162,39,.55); border-radius: 22px;
+  display: block; text-decoration: none; color: #f2f7f4;
+  background: linear-gradient(165deg, #134434 0%, #0d2f23 55%, #081f16 100%);
+  border: 1px solid rgba(201,162,39,.35); border-radius: 22px;
   transform-style: preserve-3d; will-change: transform;
-  box-shadow: 0 34px 70px rgba(0,0,0,.5), 0 0 0 1px rgba(201,162,39,.12), 0 0 46px rgba(201,162,39,.12);
+  box-shadow: 0 34px 70px rgba(0,0,0,.45), 0 0 0 1px rgba(14,122,82,.25), 0 0 46px rgba(14,122,82,.18);
   transition: box-shadow .35s ease;
 }
-.s3d-card:hover { box-shadow: 0 40px 80px rgba(0,0,0,.55), 0 0 0 1px rgba(201,162,39,.3), 0 0 70px rgba(201,162,39,.22); }
-.s3d-photo { position: relative; display: block; aspect-ratio: 16/10; overflow: hidden; background: #0b0904; border-radius: 22px 22px 0 0; transform-style: preserve-3d; }
+.s3d-card:hover { box-shadow: 0 40px 80px rgba(0,0,0,.5), 0 0 0 1px rgba(201,162,39,.35), 0 0 70px rgba(14,122,82,.3); }
+.s3d-photo { position: relative; display: block; aspect-ratio: 16/10; overflow: hidden; background: #081f16; border-radius: 22px 22px 0 0; transform-style: preserve-3d; }
 .s3d-photo img { width: 100%; height: 100%; object-fit: cover; display: block; transform: translateZ(30px); }
-.s3d-nophoto { display: flex; align-items: center; justify-content: center; height: 100%; color: #a8925a; font-weight: 700; }
+.s3d-nophoto { display: flex; align-items: center; justify-content: center; height: 100%; color: #9fd4bb; font-weight: 700; }
 .s3d-shine {
   position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity .35s ease;
-  background: radial-gradient(circle at var(--mx,50%) var(--my,50%), rgba(255,244,214,.34), rgba(255,244,214,.06) 42%, transparent 62%);
+  background: radial-gradient(circle at var(--mx,50%) var(--my,50%), rgba(214,255,235,.3), rgba(214,255,235,.06) 42%, transparent 62%);
   mix-blend-mode: screen;
 }
 .s3d-card:hover .s3d-shine, .s3d-card:focus-visible .s3d-shine { opacity: 1; }
@@ -375,8 +413,8 @@ input[type="range"] { width: 100%; accent-color: var(--green); }
   box-shadow: 0 6px 18px rgba(0,0,0,.4);
 }
 .s3d-body { display: flex; flex-direction: column; gap: 6px; padding: 18px 20px 20px; transform: translateZ(24px); transform-style: preserve-3d; }
-.s3d-title { font-family: var(--font-head); font-weight: 800; font-size: 1.15rem; color: #fff8e7; }
-.s3d-meta { font-size: .88rem; color: #cbb87f; }
+.s3d-title { font-family: var(--font-head); font-weight: 800; font-size: 1.15rem; color: #ffffff; }
+.s3d-meta { font-size: .88rem; color: #b9d8c8; }
 .s3d-price { font-size: 1.5rem; font-weight: 800; color: #e8c94a; font-family: var(--font-head); }
 .s3d-deal { font-size: .85rem; font-weight: 700; color: #9fe8b8; }
 
@@ -384,7 +422,7 @@ input[type="range"] { width: 100%; accent-color: var(--green); }
 .s3d-chips { position: absolute; inset: 0; pointer-events: none; z-index: 3; will-change: transform; }
 .s3d-chip {
   position: absolute; pointer-events: none; white-space: nowrap;
-  background: rgba(20,16,7,.72); border: 1px solid rgba(201,162,39,.6); color: #f0dfae;
+  background: rgba(13,47,35,.8); border: 1px solid rgba(201,162,39,.45); color: #f0e7c8;
   backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
   border-radius: 999px; padding: 8px 16px; font-size: .82rem; font-weight: 800;
   box-shadow: 0 12px 28px rgba(0,0,0,.4);

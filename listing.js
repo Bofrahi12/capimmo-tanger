@@ -93,19 +93,24 @@
 
   /* المعرض */
   const realPhotos = l.photos && l.photos.length > 0 && l.photo_real ? l.photos : [];
+  // 🎨 صور توضيحية مولّدة (ليست صور العقار الحقيقي) — تُعرض مع شارة واضحة
+  const aiPhotos = l.photos_ai && l.photos && l.photos.length > 0 ? l.photos : [];
+  const galleryPhotos = realPhotos.length ? realPhotos : aiPhotos;
+  const aiNotice = aiPhotos.length && !realPhotos.length ? `
+      <p class="ai-notice" role="note">🎨 <strong>صور توضيحية:</strong> الصور المعروضة مولّدة بالذكاء الاصطناعي لأغراض التوضيح فقط — ليست صور العقار الحقيقي. اطلب الصور الحقيقية من الوكالة عبر واتساب قبل المعاينة.</p>` : "";
   let galleryHTML;
-  if (realPhotos.length) {
+  if (galleryPhotos.length) {
     galleryHTML = `
       <div class="gallery-main">
-        <img id="gMain" src="${esc(realPhotos[0])}" alt="${esc(l.title)} — صورة 1">
+        <img id="gMain" src="${esc(galleryPhotos[0])}" alt="${esc(l.title)} — صورة 1">
       </div>
-      ${realPhotos.length > 1 ? `
+      ${galleryPhotos.length > 1 ? `
       <div class="gallery-thumbs" role="group" aria-label="صور العقار">
-        ${realPhotos.map((src, i) => `
+        ${galleryPhotos.map((src, i) => `
           <button type="button" data-thumb="${i}" aria-current="${i === 0}" aria-label="عرض الصورة ${i + 1}">
             <img src="${esc(src)}" alt="${esc(l.title)} — صورة ${i + 1}" loading="lazy">
           </button>`).join("")}
-      </div>` : ""}`;
+      </div>` : ""}${aiNotice}`;
   } else {
     galleryHTML = `
       <div class="gallery-main">
@@ -146,10 +151,15 @@
   const waAsk = `${waBase}?text=${encodeURIComponent(
     `السلام عليكم، عندي استفسار حول هذا العقار:\n${l.title} — ${fmtPrice(l.price)}\n${pageUrl}`
   )}`;
+  const mailAsk = `mailto:mounir.boufrahi90@gmail.com?subject=${encodeURIComponent(
+    `استفسار حول عقار: ${l.title}`
+  )}&body=${encodeURIComponent(
+    `السلام عليكم،\nعندي استفسار حول هذا العقار:\n${l.title}\nالثمن: ${fmtPrice(l.price)}\nرابط التفاصيل: ${pageUrl}`
+  )}`;
 
   /* عقارات مشابهة في نفس المدينة (روابط داخلية) */
   const similarHTML = (() => {
-    const sim = LISTINGS.filter((x) => x.id !== l.id && x.city === l.city).slice(0, 3);
+    const sim = LISTINGS.filter((x) => !x.hidden && x.id !== l.id && x.city === l.city).slice(0, 3);
     if (!sim.length) return "";
     return `
   <section class="similar" aria-label="عقارات مشابهة">
@@ -222,6 +232,7 @@
         <a class="btn btn-primary" href="${waView}" target="_blank" rel="noopener">📅 طلب معاينة عبر واتساب</a>
         <a class="btn btn-accent" href="tel:0693981822">📞 اتصال بالوكالة</a>
         <a class="btn btn-secondary" href="${waAsk}" target="_blank" rel="noopener">💬 استفسار واتساب</a>
+        <a class="btn btn-ghost" href="${mailAsk}">✉️ استفسار عبر البريد</a>
         <button class="btn btn-ghost" type="button" id="shareBtn">🔗 مشاركة</button>
         <button class="icon-btn" type="button" id="favBtn" aria-pressed="${isFav}">${isFav ? "❤️" : "🤍"} مفضلة</button>
       </div>
@@ -260,12 +271,57 @@
     document.querySelectorAll("[data-thumb]").forEach((btn) => {
       btn.addEventListener("click", () => {
         const i = parseInt(btn.getAttribute("data-thumb"), 10);
-        gMain.src = realPhotos[i];
+        gMain.src = galleryPhotos[i];
         gMain.alt = `${l.title} — صورة ${i + 1}`;
         document.querySelectorAll("[data-thumb]").forEach((b) =>
           b.setAttribute("aria-current", b === btn ? "true" : "false"));
       });
     });
+
+    /* ---------- لايت بوكس: ملء الشاشة + أسهم + سحب ---------- */
+    const lb = document.createElement("div");
+    lb.className = "lightbox";
+    lb.setAttribute("role", "dialog");
+    lb.setAttribute("aria-label", "عرض الصور بحجم كامل");
+    lb.innerHTML = `
+      <button class="lb-btn lb-close" type="button" aria-label="إغلاق">×</button>
+      <button class="lb-btn lb-prev" type="button" aria-label="الصورة السابقة">‹</button>
+      <img id="lbImg" alt="">
+      <button class="lb-btn lb-next" type="button" aria-label="الصورة التالية">›</button>
+      <span class="lb-count" id="lbCount"></span>`;
+    document.body.appendChild(lb);
+    const lbImg = lb.querySelector("#lbImg"), lbCount = lb.querySelector("#lbCount");
+    let lbIdx = 0;
+    const lbShow = (i) => {
+      lbIdx = (i + galleryPhotos.length) % galleryPhotos.length;
+      lbImg.src = galleryPhotos[lbIdx];
+      lbImg.alt = `${l.title} — صورة ${lbIdx + 1}`;
+      lbCount.textContent = `${lbIdx + 1} / ${galleryPhotos.length}`;
+    };
+    const lbOpen = (i) => { lbShow(i); lb.classList.add("open"); document.body.style.overflow = "hidden"; };
+    const lbClose = () => { lb.classList.remove("open"); document.body.style.overflow = ""; };
+    gMain.addEventListener("click", () => {
+      const cur = galleryPhotos.indexOf(gMain.getAttribute("src"));
+      lbOpen(cur >= 0 ? cur : 0);
+    });
+    lb.querySelector(".lb-close").addEventListener("click", lbClose);
+    lb.querySelector(".lb-prev").addEventListener("click", (e) => { e.stopPropagation(); lbShow(lbIdx - 1); });
+    lb.querySelector(".lb-next").addEventListener("click", (e) => { e.stopPropagation(); lbShow(lbIdx + 1); });
+    lb.addEventListener("click", (e) => { if (e.target === lb) lbClose(); });
+    document.addEventListener("keydown", (e) => {
+      if (!lb.classList.contains("open")) return;
+      if (e.key === "Escape") lbClose();
+      if (e.key === "ArrowLeft") lbShow(lbIdx + 1);   // RTL: اليسار = التالي
+      if (e.key === "ArrowRight") lbShow(lbIdx - 1);
+    });
+    let tx0 = null;
+    lb.addEventListener("touchstart", (e) => { tx0 = e.touches[0].clientX; }, { passive: true });
+    lb.addEventListener("touchend", (e) => {
+      if (tx0 == null) return;
+      const dx = e.changedTouches[0].clientX - tx0;
+      if (Math.abs(dx) > 40) lbShow(dx < 0 ? lbIdx + 1 : lbIdx - 1); // السحب لليسار = التالي
+      tx0 = null;
+    }, { passive: true });
   }
 
   /* مشاركة */
@@ -298,4 +354,13 @@
     }
     store.set("souq_favs", f);
   });
+
+  /* قائمة الهاتف (هامبرغر) */
+  try {
+    const nt = $("navToggle"), nl = $("mainNav");
+    if (nt && nl) nt.addEventListener("click", () => {
+      const open = nl.classList.toggle("open");
+      nt.setAttribute("aria-expanded", open ? "true" : "false");
+    });
+  } catch (e) {}
 })();

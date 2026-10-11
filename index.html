@@ -16,6 +16,14 @@
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="شقة معروضة للبيع في طنجة — كاب إيمو طنجة">
   <meta name="theme-color" content="#0e7a52">
+  <!-- تحليلات الموقع: الصق معرّف القياس GA4 الخاص بك مكان G-XXXXXXXXXX -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@600;700;800&family=Noto+Sans+Arabic:wght@400;500;700;800&display=swap" rel="stylesheet">
@@ -24,7 +32,8 @@
   <script src="./data/listings.js" defer></script>
   <script src="./app.js" defer></script>
   <!-- ربط الـbackend: عند توفر رابط الـAPI ضع provider:"http" و endpoint:"https://…/api/ai/parse" -->
-  <script>window.SOUQ_AI_CONFIG = { provider: "http", endpoint: "https://capimmo-api.onrender.com/api/ai/parse" };</script>
+  <!-- timeoutMs مرتفع لأن خدمة Render المجانية تنام بعد الخمول وأول طلب يفيّقها (cold start) -->
+  <script>window.SOUQ_AI_CONFIG = { provider: "http", endpoint: "https://capimmo-api.onrender.com/api/ai/parse", timeoutMs: 25000 };</script>
   <script src="./js/ai-assistant.js" defer></script>
   <script src="./showcase3d.js" defer></script>
 </head>
@@ -33,8 +42,9 @@
 
 <header class="site-header">
   <div class="wrap nav">
-    <a class="brand" href="./index.html">سوق بيع العقار المغربي<small>ابحث، قارن، وتحقق قبل القرار</small></a>
-    <nav class="nav-links" aria-label="التنقل الرئيسي">
+    <a class="brand" href="./index.html">كاب إيمو طنجة<small>سوق بيع العقار المغربي</small></a>
+    <button class="nav-toggle" id="navToggle" type="button" aria-label="فتح قائمة التنقل" aria-expanded="false" aria-controls="mainNav">☰</button>
+    <nav class="nav-links" id="mainNav" aria-label="التنقل الرئيسي">
       <a href="./index.html">الرئيسية</a>
       <a href="#properties">العقارات</a>
       <a href="#deals">الهمزات</a>
@@ -42,6 +52,8 @@
       <a href="#agency">عقارات الوكالة</a>
       <a href="#calculator">الحاسبة</a>
       <a href="#request">اطلب عقاراً</a>
+      <a href="./blog/">المدونة</a>
+      <a href="./about.html">من نحن</a>
     </nav>
     <div class="nav-actions">
       <button class="theme-toggle" id="themeToggle" type="button" aria-label="تبديل الوضع الداكن">🌙</button>
@@ -100,9 +112,9 @@
 
   <!-- إحصائيات -->
   <section class="wrap stats" aria-label="أرقام الموقع">
-    <div class="stat"><strong id="statCount">–</strong><span>عقار في اللائحة</span></div>
-    <div class="stat"><strong id="statCities">–</strong><span>مدينة مغربية</span></div>
-    <div class="stat"><strong id="statDeals">–</strong><span>همزة تحت متوسط المدينة</span></div>
+    <div class="stat"><strong id="statCount" class="skel">–</strong><span>عقار معروض في طنجة</span></div>
+    <div class="stat"><strong id="statCities" class="skel">–</strong><span>مدينة مغربية</span></div>
+    <div class="stat"><strong id="statDeals" class="skel">–</strong><span>همزة تحت متوسط المدينة</span></div>
     <div class="stat"><strong>100%</strong><span>إعلانات برابط المصدر</span></div>
   </section>
 
@@ -118,7 +130,9 @@
       </div>
 
       <div class="search-panel" role="search" aria-label="البحث في العقارات">
-        <div class="filters">
+        <button class="filters-toggle" id="filtersToggle" type="button" aria-expanded="true" aria-controls="filtersBox">🔍 الفلاتر <span class="chev">▾</span></button>
+        <div class="active-chips" id="activeChips" aria-live="polite"></div>
+        <div class="filters" id="filtersBox">
           <div class="field">
             <label for="q">بحث حر</label>
             <input id="q" type="search" placeholder="مثال: طنجة، أكدال، موقف سيارة" autocomplete="off">
@@ -490,7 +504,7 @@
   <div class="wrap">
     <div class="footer-grid">
       <div>
-        <h3>سوق بيع العقار المغربي</h3>
+        <h3>كاب إيمو طنجة</h3>
         <p style="color:var(--muted);font-size:.9rem">منصة مغربية لمقارنة العقارات المعروضة للبيع. المعلومات للمقارنة الأولية فقط — تحقق من المصدر الأصلي قبل أي التزام.</p>
       </div>
       <nav aria-label="روابط المدن">
@@ -503,6 +517,8 @@
           <li><a href="#properties">العقارات</a></li>
           <li><a href="#deals">الهمزات</a></li>
           <li><a href="#calculator">حاسبة القرض</a></li>
+          <li><a href="./blog/">المدونة</a></li>
+          <li><a href="./about.html">من نحن</a></li>
           <li><a href="./privacy.html">سياسة الخصوصية</a></li>
           <li><a href="./terms.html">شروط الاستخدام</a></li>
         </ul>
@@ -512,7 +528,8 @@
         <ul>
           <li><a href="tel:0693981822">📞 0693981822</a></li>
           <li><a href="https://wa.me/212693981822" target="_blank" rel="noopener">💬 واتساب</a></li>
-          <li style="color:var(--muted);font-size:.9rem">وكالة «كاب إيمو طنجة»</li>
+          <li><a href="https://www.instagram.com/cap_immo12/" target="_blank" rel="noopener">📸 إنستغرام: @cap_immo12</a></li>
+          <li style="color:var(--muted);font-size:.9rem">وكالة «كاب إيمو طنجة» — طنجة، المغرب</li>
         </ul>
       </div>
     </div>
