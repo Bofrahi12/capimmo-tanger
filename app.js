@@ -99,8 +99,18 @@
   }
 
   /* ---------- شارات الثقة (صياغة صريحة — ممنوع «موثق») ---------- */
+  /* تنبيهات البحث: «جديد منذ زيارتك» — localStorage فقط، بلا backend */
+  const LAST_VISIT_KEY = "capimmo_last_visit";
+  let lastVisitTs = 0;
+  try { lastVisitTs = parseInt(localStorage.getItem(LAST_VISIT_KEY) || "0", 10) || 0; } catch (e) { lastVisitTs = 0; }
+  const isNewSinceVisit = (l) => {
+    if (!lastVisitTs || !l.date_added) return false;
+    const t = new Date(l.date_added + "T00:00:00").getTime();
+    return !isNaN(t) && t > lastVisitTs;
+  };
   function trustBadges(l) {
     const b = [];
+    if (isNewSinceVisit(l)) b.push('<span class="badge is-new">🆕 جديد</span>');
     if (l.agency_direct) b.push('<span class="badge agency">إعلان الوكالة</span>');
     const d = dealPct(l);
     if (d != null) b.push(`<span class="badge deal">🔥 همزة −${d}%</span>`);
@@ -524,6 +534,42 @@
   renderSections();
   updateCompareBar();
   calcMortgage();
+
+  /* ختم الزيارة الحالية — لشارة «جديد منذ زيارتك» في الزيارة القادمة */
+  try { localStorage.setItem(LAST_VISIT_KEY, String(Date.now())); } catch (e) {}
+
+  /* ---------- نبهني بالجديد — اشتراك واتساب بمعايير الفلاتر الحالية ---------- */
+  const alertBtn = $("alertBtn");
+  if (alertBtn) alertBtn.addEventListener("click", () => {
+    const optText = (sel) => { const o = sel.options[sel.selectedIndex]; return o ? o.text.trim() : ""; };
+    const num = (v) => { const n = parseFloat(v); return isNaN(n) ? null : n; };
+    const rangeLine = (label, min, max, unit) => {
+      min = num(min); max = num(max);
+      if (min == null && max == null) return null;
+      let r;
+      if (min != null && max != null) r = `${fmtNum(min)} - ${fmtNum(max)}`;
+      else if (min != null) r = `≥ ${fmtNum(min)}`;
+      else r = `≤ ${fmtNum(max)}`;
+      return `${label}${r} ${unit}`;
+    };
+    const lines = ["السلام عليكم، أريد أن تنبهوني بالعقارات الجديدة التي تطابق معايير بحثي:"];
+    if (F.q.value.trim()) lines.push(`• البحث: ${F.q.value.trim()}`);
+    if (fCity.value) lines.push(`• المدينة: ${optText(fCity)}`);
+    if (fHood.value) lines.push(`• الحي: ${optText(fHood)}`);
+    if (fType.value) lines.push(`• النوع: ${optText(fType)}`);
+    const pr = rangeLine("• الثمن: ", F.minP.value, F.maxP.value, "درهم");
+    if (pr) lines.push(pr);
+    const ar = rangeLine("• المساحة: ", F.minA.value, F.maxA.value, "م²");
+    if (ar) lines.push(ar);
+    if (F.rooms.value) lines.push(`• الغرف: ${optText(F.rooms)}`);
+    if (F.baths.value) lines.push(`• الحمامات: ${optText(F.baths)}`);
+    if (F.deals.checked) lines.push("• الهمزات فقط");
+    if (F.fur.checked) lines.push("• مفروش");
+    if (F.park.checked) lines.push("• موقف سيارة");
+    if (F.elev.checked) lines.push("• مصعد");
+    lines.push("شكراً لكم.");
+    window.open(`https://wa.me/212693981822?text=${encodeURIComponent(lines.join("\n"))}`, "_blank", "noopener");
+  });
 
   /* ---------- قائمة الهاتف (هامبرغر) ---------- */
   try {

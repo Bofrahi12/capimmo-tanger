@@ -193,6 +193,7 @@ a { color: var(--green); }
 .badge.unavailable { background: #8a8a8a; }
 .badge.review { background: #a06a00; }
 .badge.ai-photos { background: #7b5cd6; }
+.badge.is-new { background: #0ea5e9; }
 .ai-notice { background: #f3efff; border: 1px solid #c9bdf0; border-radius: 10px; padding: .7rem 1rem; font-size: .92rem; color: #4a3d8f; margin-top: .8rem; }
 
 /* ---------- فلاتر قابلة للطي + رقائق الفلاتر النشطة ---------- */
