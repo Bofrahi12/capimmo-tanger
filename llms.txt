@@ -1,0 +1,14 @@
+# Cap Immo — Immobilier à Tanger, Maroc
+
+> Cap Immo : recherche et comparaison de biens immobiliers au Maroc.
+> Appartements et studios par ville, prix et surface, avec prix au m².
+> Site : https://bofrahi12.github.io/capimmo-tanger/
+
+## Ce que propose le site
+- Recherche d'appartements et studios à vendre au Maroc
+- Filtres par ville, prix et surface
+- Prix au mètre carré affiché
+- Fiches biens avec lien vers l'annonce d'origine
+
+## Ville principale
+- Tanger, Maroc (et autres villes du Maroc)

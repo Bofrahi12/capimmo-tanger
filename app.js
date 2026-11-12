@@ -99,23 +99,12 @@
   }
 
   /* ---------- شارات الثقة (صياغة صريحة — ممنوع «موثق») ---------- */
-  /* تنبيهات البحث: «جديد منذ زيارتك» — localStorage فقط، بلا backend */
-  const LAST_VISIT_KEY = "capimmo_last_visit";
-  let lastVisitTs = 0;
-  try { lastVisitTs = parseInt(localStorage.getItem(LAST_VISIT_KEY) || "0", 10) || 0; } catch (e) { lastVisitTs = 0; }
-  const isNewSinceVisit = (l) => {
-    if (!lastVisitTs || !l.date_added) return false;
-    const t = new Date(l.date_added + "T00:00:00").getTime();
-    return !isNaN(t) && t > lastVisitTs;
-  };
   function trustBadges(l) {
     const b = [];
-    if (isNewSinceVisit(l)) b.push('<span class="badge is-new">🆕 جديد</span>');
     if (l.agency_direct) b.push('<span class="badge agency">إعلان الوكالة</span>');
     const d = dealPct(l);
     if (d != null) b.push(`<span class="badge deal">🔥 همزة −${d}%</span>`);
     if (l.verification === "page") b.push('<span class="badge verify">تم التحقق من الرابط</span>');
-    if (l.photos_ai) b.push('<span class="badge ai-photos" title="صور مولّدة بالذكاء الاصطناعي لأغراض التوضيح — ليست صور العقار الحقيقي">🎨 صور توضيحية</span>');
     if (l.status === "review") b.push('<span class="badge review">يحتاج مراجعة</span>');
     if (l.status === "unavailable") b.push('<span class="badge unavailable">غير متاح حالياً</span>');
     return b.join("");
@@ -199,10 +188,8 @@
   };
 
   /* ---------- الفلاتر ---------- */
-  // 🔒 مرحلة طنجة فقط: العقارات المخفية (خارج طنجة) لا تظهر في الشبكة ولا الهمزات ولا التصفح
-  const isVisible = (l) => !l.hidden;
-  const cities = [...new Set(LISTINGS.filter(isVisible).map((l) => l.city).filter(Boolean))].sort();
-  const types = [...new Set(LISTINGS.filter(isVisible).map((l) => l.type).filter(Boolean))].sort();
+  const cities = [...new Set(LISTINGS.map((l) => l.city).filter(Boolean))].sort();
+  const types = [...new Set(LISTINGS.map((l) => l.type).filter(Boolean))].sort();
   const fCity = $("fCity"), fHood = $("fHood"), fType = $("fType");
 
   cities.forEach((c) => fCity.add(new Option(c, c)));
@@ -211,7 +198,7 @@
   function refreshHoods() {
     const c = fCity.value;
     const hoods = [...new Set(
-      LISTINGS.filter(isVisible).filter((l) => !c || l.city === c).map((l) => l.neighborhood).filter(Boolean)
+      LISTINGS.filter((l) => !c || l.city === c).map((l) => l.neighborhood).filter(Boolean)
     )].sort();
     const cur = fHood.value;
     fHood.innerHTML = '<option value="">كل الأحياء</option>';
@@ -245,7 +232,6 @@
     const status = F.status.value;
 
     let list = LISTINGS.filter((l) => {
-      if (l.hidden) return false; // 🔒 مرحلة طنجة فقط
       if (q) {
         const hay = normQuery([l.title, l.city, l.neighborhood, l.address, l.description,
           (l.features || []).join(" "), l.type, l.source_name].join(" "));
@@ -345,7 +331,7 @@
   /* ---------- مفضلتي ---------- */
   const favGrid = $("favGrid"), favEmpty = $("favEmpty");
   function renderFavs() {
-    const list = favs.map(byId).filter(Boolean).filter((l) => !l.hidden);
+    const list = favs.map(byId).filter(Boolean);
     renderGrid(favGrid, list, true);
     favEmpty.classList.toggle("show", list.length === 0);
   }
@@ -429,20 +415,20 @@
   /* ---------- الأقسام الديناميكية ---------- */
   function renderSections() {
     // الهمزات: ثمن المتر أقل من متوسط المدينة
-    const deals = LISTINGS.filter((l) => isVisible(l) && l.status !== "unavailable" && isDeal(l))
+    const deals = LISTINGS.filter((l) => l.status !== "unavailable" && isDeal(l))
       .sort((a, b) => dealPct(b) - dealPct(a));
     renderGrid($("dealsGrid"), deals, true);
 
     // عقارات الوكالة
-    renderGrid($("agencyGrid"), LISTINGS.filter((l) => isVisible(l) && l.agency_direct), true);
+    renderGrid($("agencyGrid"), LISTINGS.filter((l) => l.agency_direct), true);
 
     // مؤشرات السوق
     $("medianGrid").innerHTML = Object.entries(SOUQ_CONFIG.cityMedians).map(([c, m]) => `
       <div class="median-card"><span>${esc(c)}</span><strong>${fmtNum(m)} درهم/م²</strong>
       <span>متوسط مرجعي داخلي للمقارنة</span></div>`).join("");
 
-    // إحصائيات (العقارات الظاهرة فقط — مرحلة طنجة)
-    $("statCount").textContent = LISTINGS.filter((l) => !l.hidden).length;
+    // إحصائيات
+    $("statCount").textContent = LISTINGS.length;
     $("statCities").textContent = cities.length;
     $("statDeals").textContent = deals.length;
 
@@ -534,97 +520,4 @@
   renderSections();
   updateCompareBar();
   calcMortgage();
-
-  /* ختم الزيارة الحالية — لشارة «جديد منذ زيارتك» في الزيارة القادمة */
-  try { localStorage.setItem(LAST_VISIT_KEY, String(Date.now())); } catch (e) {}
-
-  /* ---------- نبهني بالجديد — اشتراك واتساب بمعايير الفلاتر الحالية ---------- */
-  const alertBtn = $("alertBtn");
-  if (alertBtn) alertBtn.addEventListener("click", () => {
-    const optText = (sel) => { const o = sel.options[sel.selectedIndex]; return o ? o.text.trim() : ""; };
-    const num = (v) => { const n = parseFloat(v); return isNaN(n) ? null : n; };
-    const rangeLine = (label, min, max, unit) => {
-      min = num(min); max = num(max);
-      if (min == null && max == null) return null;
-      let r;
-      if (min != null && max != null) r = `${fmtNum(min)} - ${fmtNum(max)}`;
-      else if (min != null) r = `≥ ${fmtNum(min)}`;
-      else r = `≤ ${fmtNum(max)}`;
-      return `${label}${r} ${unit}`;
-    };
-    const lines = ["السلام عليكم، أريد أن تنبهوني بالعقارات الجديدة التي تطابق معايير بحثي:"];
-    if (F.q.value.trim()) lines.push(`• البحث: ${F.q.value.trim()}`);
-    if (fCity.value) lines.push(`• المدينة: ${optText(fCity)}`);
-    if (fHood.value) lines.push(`• الحي: ${optText(fHood)}`);
-    if (fType.value) lines.push(`• النوع: ${optText(fType)}`);
-    const pr = rangeLine("• الثمن: ", F.minP.value, F.maxP.value, "درهم");
-    if (pr) lines.push(pr);
-    const ar = rangeLine("• المساحة: ", F.minA.value, F.maxA.value, "م²");
-    if (ar) lines.push(ar);
-    if (F.rooms.value) lines.push(`• الغرف: ${optText(F.rooms)}`);
-    if (F.baths.value) lines.push(`• الحمامات: ${optText(F.baths)}`);
-    if (F.deals.checked) lines.push("• الهمزات فقط");
-    if (F.fur.checked) lines.push("• مفروش");
-    if (F.park.checked) lines.push("• موقف سيارة");
-    if (F.elev.checked) lines.push("• مصعد");
-    lines.push("شكراً لكم.");
-    window.open(`https://wa.me/212693981822?text=${encodeURIComponent(lines.join("\n"))}`, "_blank", "noopener");
-  });
-
-  /* ---------- قائمة الهاتف (هامبرغر) ---------- */
-  try {
-    const nt = $("navToggle"), nl = $("mainNav");
-    if (nt && nl) nt.addEventListener("click", () => {
-      const open = nl.classList.toggle("open");
-      nt.setAttribute("aria-expanded", open ? "true" : "false");
-      nt.setAttribute("aria-label", open ? "إغلاق قائمة التنقل" : "فتح قائمة التنقل");
-    });
-  } catch (e) {}
-
-  /* ---------- الفلاتر القابلة للطي + رقائق الفلاتر النشطة ---------- */
-  try {
-    const ft = $("filtersToggle"), fb = $("filtersBox"), chips = $("activeChips");
-    if (ft && fb) {
-      // على الهاتف تبدأ مطوية
-      if (window.matchMedia("(max-width: 900px)").matches) {
-        fb.classList.add("collapsed");
-        ft.setAttribute("aria-expanded", "false");
-      }
-      ft.addEventListener("click", () => {
-        const c = fb.classList.toggle("collapsed");
-        ft.setAttribute("aria-expanded", c ? "false" : "true");
-      });
-    }
-    const CHIP_FIELDS = [
-      ["q", "بحث"], ["fCity", "المدينة"], ["fHood", "الحي"], ["fType", "النوع"],
-      ["fMinPrice", "أدنى ثمن"], ["fMaxPrice", "أقصى ثمن"], ["fMinArea", "أدنى مساحة"],
-      ["fMaxArea", "أقصى مساحة"], ["fRooms", "الغرف"], ["fBaths", "الحمامات"],
-      ["fStatus", "الحالة"], ["fSort", "الترتيب"]
-    ];
-    window.__renderChips = function () {
-      if (!chips) return;
-      const out = [];
-      CHIP_FIELDS.forEach(([id, label]) => {
-        const el = $(id);
-        if (!el || !el.value) return;
-        const txt = el.tagName === "SELECT"
-          ? el.options[el.selectedIndex].text : el.value;
-        out.push(`<span class="chip">${esc(label)}: ${esc(txt)}<button type="button" data-clear="${id}" aria-label="إزالة فلتر ${esc(label)}">×</button></span>`);
-      });
-      chips.innerHTML = out.join("");
-      chips.querySelectorAll("[data-clear]").forEach((b) =>
-        b.addEventListener("click", () => {
-          const el = $(b.getAttribute("data-clear"));
-          if (el) { el.value = ""; el.dispatchEvent(new Event("change", { bubbles: true })); }
-          applyFilters(); window.__renderChips();
-        }));
-    };
-    const _apply = applyFilters;
-    applyFilters = function () { _apply(); window.__renderChips(); };
-    window.__renderChips();
-    // إزالة هيكل التحميل بعد أول عرض
-    ["statCount", "statCities", "statDeals"].forEach((id) => {
-      const el = $(id); if (el) el.classList.remove("skel");
-    });
-  } catch (e) {}
 })();

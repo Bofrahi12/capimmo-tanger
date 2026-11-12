@@ -2,44 +2,26 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; media-src 'self' blob:; connect-src 'self' https://www.google-analytics.com https://region1.google-analytics.com https://www.googletagmanager.com; frame-src 'none'; object-src 'none'; base-uri 'self'; form-action 'self'">
-<meta name="referrer" content="strict-origin-when-cross-origin">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>كاب إيمو طنجة | ابحث وقارن العقارات في المغرب</title>
   <meta name="description" content="ابحث وقارن العقارات المعروضة للبيع في المغرب: الشقق والستوديوهات حسب المدينة والثمن والمساحة، مع ثمن المتر المربع ورابط المصدر الأصلي لكل إعلان.">
-  <link rel="canonical" href="https://bofrahi12.github.io/capimmo-tanger/">
-  <link rel="alternate" hreflang="ar" href="https://bofrahi12.github.io/capimmo-tanger/">
-  <link rel="alternate" hreflang="fr" href="https://bofrahi12.github.io/capimmo-tanger/fr/">
-  <link rel="alternate" hreflang="x-default" href="https://bofrahi12.github.io/capimmo-tanger/">
+  <link rel="canonical" href="https://capimmo-tanger.netlify.app/index.html">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="ar_MA">
   <meta property="og:title" content="كاب إيمو طنجة | ابحث وقارن العقارات في المغرب">
   <meta property="og:description" content="ابحث وقارن العقارات المعروضة للبيع في المغرب حسب المدينة والثمن والمساحة، مع ثمن المتر المربع ورابط المصدر الأصلي لكل إعلان.">
-  <meta property="og:url" content="https://bofrahi12.github.io/capimmo-tanger/index.html">
-  <meta property="og:image" content="https://bofrahi12.github.io/capimmo-tanger/assets/og-cover.jpg">
+  <meta property="og:url" content="https://capimmo-tanger.netlify.app/index.html">
+  <meta property="og:image" content="https://capimmo-tanger.netlify.app/assets/og-cover.jpg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:image:alt" content="شقة معروضة للبيع في طنجة — كاب إيمو طنجة">
   <meta name="theme-color" content="#0e7a52">
-  <!-- تحليلات الموقع: الصق معرّف القياس GA4 الخاص بك مكان G-XXXXXXXXXX -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-XXXXXXXXXX');
-  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@600;700;800&family=Noto+Sans+Arabic:wght@400;500;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./styles.css">
-  <link rel="stylesheet" href="./assets/ai-assistant.css">
   <script src="./data/listings.js" defer></script>
   <script src="./app.js" defer></script>
-  <!-- ربط الـbackend: عند توفر رابط الـAPI ضع provider:"http" و endpoint:"https://…/api/ai/parse" -->
-  <!-- timeoutMs مرتفع لأن خدمة Render المجانية تنام بعد الخمول وأول طلب يفيّقها (cold start) -->
-  <script>window.SOUQ_AI_CONFIG = { provider: "http", endpoint: "https://capimmo-api.onrender.com/api/ai/parse", timeoutMs: 25000 };</script>
-  <script src="./js/ai-assistant.js" defer></script>
   <script src="./showcase3d.js" defer></script>
 </head>
 <body>
@@ -47,9 +29,8 @@
 
 <header class="site-header">
   <div class="wrap nav">
-    <a class="brand" href="./index.html">كاب إيمو طنجة<small>سوق بيع العقار المغربي</small></a>
-    <button class="nav-toggle" id="navToggle" type="button" aria-label="فتح قائمة التنقل" aria-expanded="false" aria-controls="mainNav">☰</button>
-    <nav class="nav-links" id="mainNav" aria-label="التنقل الرئيسي">
+    <a class="brand" href="./index.html">سوق بيع العقار المغربي<small>ابحث، قارن، وتحقق قبل القرار</small></a>
+    <nav class="nav-links" aria-label="التنقل الرئيسي">
       <a href="./index.html">الرئيسية</a>
       <a href="#properties">العقارات</a>
       <a href="#deals">الهمزات</a>
@@ -57,12 +38,9 @@
       <a href="#agency">عقارات الوكالة</a>
       <a href="#calculator">الحاسبة</a>
       <a href="#request">اطلب عقاراً</a>
-      <a href="./blog/">المدونة</a>
-      <a href="./about.html">من نحن</a>
     </nav>
     <div class="nav-actions">
       <button class="theme-toggle" id="themeToggle" type="button" aria-label="تبديل الوضع الداكن">🌙</button>
-      <a class="btn btn-secondary btn-sm lang-switch" href="./fr/" hreflang="fr" lang="fr">Français</a>
       <a class="btn btn-secondary btn-sm" href="tel:0693981822">📞 0693981822</a>
     </div>
   </div>
@@ -104,23 +82,11 @@
     </aside>
   </section>
 
-  <!-- الجالية: الشراء الآمن -->
-  <section class="diaspora-banner" aria-label="عقار المغرب بلا نصب">
-    <div class="wrap diaspora-inner">
-      <div>
-        <p class="eyebrow">🇲🇦 للمغاربة في أوروبا وأمريكا</p>
-        <h2>شري عقارك في المغرب عن بُعد… بلا ما يتنصب عليك</h2>
-        <p>دليل الشراء الآمن خطوة بخطوة + مرافقة «كاب إيمو طنجة» من المعاينة بالفيديو حتى توقيع العقد.</p>
-      </div>
-      <a class="btn btn-primary" href="https://bofrahi12.github.io/tanger-safe-buy/" target="_blank" rel="noopener">اكتشف الشراء الآمن</a>
-    </div>
-  </section>
-
   <!-- إحصائيات -->
   <section class="wrap stats" aria-label="أرقام الموقع">
-    <div class="stat"><strong id="statCount" class="skel">–</strong><span>عقار معروض في طنجة</span></div>
-    <div class="stat"><strong id="statCities" class="skel">–</strong><span>مدينة مغربية</span></div>
-    <div class="stat"><strong id="statDeals" class="skel">–</strong><span>همزة تحت متوسط المدينة</span></div>
+    <div class="stat"><strong id="statCount">–</strong><span>عقار في اللائحة</span></div>
+    <div class="stat"><strong id="statCities">–</strong><span>مدينة مغربية</span></div>
+    <div class="stat"><strong id="statDeals">–</strong><span>همزة تحت متوسط المدينة</span></div>
     <div class="stat"><strong>100%</strong><span>إعلانات برابط المصدر</span></div>
   </section>
 
@@ -136,9 +102,7 @@
       </div>
 
       <div class="search-panel" role="search" aria-label="البحث في العقارات">
-        <button class="filters-toggle" id="filtersToggle" type="button" aria-expanded="true" aria-controls="filtersBox">🔍 الفلاتر <span class="chev">▾</span></button>
-        <div class="active-chips" id="activeChips" aria-live="polite"></div>
-        <div class="filters" id="filtersBox">
+        <div class="filters">
           <div class="field">
             <label for="q">بحث حر</label>
             <input id="q" type="search" placeholder="مثال: طنجة، أكدال، موقف سيارة" autocomplete="off">
@@ -220,7 +184,6 @@
         </div>
         <div class="filter-actions">
           <span>💡 «همزة» تعني أن ثمن المتر المربع أقل من متوسط المدينة المرجعي — وليست تخفيضاً من البائع.</span>
-          <button id="alertBtn" class="btn btn-secondary btn-sm" type="button">🔔 نبهني بالجديد</button>
           <button id="clearFilters" class="text-button" type="button">مسح جميع الفلاتر</button>
         </div>
       </div>
@@ -267,7 +230,7 @@
       <div class="section-head">
         <div>
           <h2 id="agencyTitle">🏠 عقارات الوكالة مباشرة</h2>
-          <p>عقارات تعرضها وكالة «كاب إيمو طنجة» مباشرة — للاستفسار أو المعاينة <a href="https://wa.me/212693981822?text=%D8%A7%D9%84%D8%B3%D9%84%D8%A7%D9%85%20%D8%B9%D9%84%D9%8A%D9%83%D9%85%D8%8C%20%D8%A8%D8%BA%D9%8A%D8%AA%20%D9%86%D8%B3%D8%AA%D9%81%D8%B3%D8%B1%20%D8%B9%D9%84%D9%89%20%D8%B9%D9%82%D8%A7%D8%B1%20%D9%85%D9%86%20%D8%B9%D9%82%D8%A7%D8%B1%D8%A7%D8%AA%20%D8%A7%D9%84%D9%88%D9%83%D8%A7%D9%84%D8%A9" target="_blank" rel="noopener">راسلنا على واتساب: 0693981822</a>.</p>
+          <p>عقارات تعرضها وكالة «كاب إيمو طنجة» مباشرة — للاستفسار أو المعاينة اتصل على <a href="tel:0693981822">0693981822</a>.</p>
         </div>
       </div>
       <div id="agencyGrid" class="listing-grid"></div>
@@ -511,9 +474,8 @@
   <div class="wrap">
     <div class="footer-grid">
       <div>
-        <h3>كاب إيمو طنجة</h3>
+        <h3>سوق بيع العقار المغربي</h3>
         <p style="color:var(--muted);font-size:.9rem">منصة مغربية لمقارنة العقارات المعروضة للبيع. المعلومات للمقارنة الأولية فقط — تحقق من المصدر الأصلي قبل أي التزام.</p>
-        <p style="color:var(--muted);font-size:.85rem;margin-top:.6rem">تصميم وتطوير الموقع: <a href="https://vertex-web-tanger.onrender.com/" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline">VERTEX WEB — تصميم مواقع إلكترونية في طنجة</a></p>
       </div>
       <nav aria-label="روابط المدن">
         <h3>ابحث حسب المدينة</h3>
@@ -525,8 +487,6 @@
           <li><a href="#properties">العقارات</a></li>
           <li><a href="#deals">الهمزات</a></li>
           <li><a href="#calculator">حاسبة القرض</a></li>
-          <li><a href="./blog/">المدونة</a></li>
-          <li><a href="./about.html">من نحن</a></li>
           <li><a href="./privacy.html">سياسة الخصوصية</a></li>
           <li><a href="./terms.html">شروط الاستخدام</a></li>
         </ul>
@@ -536,13 +496,12 @@
         <ul>
           <li><a href="tel:0693981822">📞 0693981822</a></li>
           <li><a href="https://wa.me/212693981822" target="_blank" rel="noopener">💬 واتساب</a></li>
-          <li><a href="https://www.instagram.com/cap_immo12/" target="_blank" rel="noopener">📸 إنستغرام: @cap_immo12</a></li>
-          <li style="color:var(--muted);font-size:.9rem">وكالة «كاب إيمو طنجة» — طنجة، المغرب</li>
+          <li style="color:var(--muted);font-size:.9rem">وكالة «كاب إيمو طنجة»</li>
         </ul>
       </div>
     </div>
     <div class="footer-bottom">
-      <span>© <span id="year"></span> كاب إيمو طنجة — جميع الحقوق محفوظة.</span>
+      <span>© <span id="year"></span> سوق بيع العقار المغربي — جميع الحقوق محفوظة.</span>
       <span>آخر تحديث للبيانات: <span id="dataUpdated"></span></span>
     </div>
   </div>
@@ -555,8 +514,8 @@
 {
   "@context": "https://schema.org",
   "@type": "WebSite",
-  "name": "كاب إيمو طنجة",
-  "url": "https://bofrahi12.github.io/capimmo-tanger/",
+  "name": "سوق بيع العقار المغربي",
+  "url": "https://capimmo-tanger.netlify.app/",
   "inLanguage": "ar",
   "description": "منصة مغربية للبحث ومقارنة العقارات المعروضة للبيع."
 }
@@ -567,7 +526,7 @@
   "@type": "RealEstateAgent",
   "name": "Cap Immo Tanger",
   "alternateName": "كاب إيمو طنجة",
-  "url": "https://bofrahi12.github.io/capimmo-tanger/",
+  "url": "https://capimmo-tanger.netlify.app/",
   "telephone": "+212693981822",
   "areaServed": { "@type": "City", "name": "Tangier" },
   "address": { "@type": "PostalAddress", "addressLocality": "Tangier", "addressCountry": "MA" },
