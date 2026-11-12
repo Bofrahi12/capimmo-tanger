@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://capimmo-tanger.netlify.app/sitemap.xml
+Sitemap: https://bofrahi12.github.io/capimmo-tanger/sitemap.xml
